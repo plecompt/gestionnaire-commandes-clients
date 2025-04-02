@@ -9,7 +9,7 @@ class Client {
     private string $adresse;
     private string $email;
 
-    public function getId(): int
+    public function getIdClient(): int
     {
         return $this->idClient;
     }
@@ -34,9 +34,9 @@ class Client {
         return $this->email;
     }
 
-    public function setId(int $id): void
+    public function setIdClient(int $idClient): void
     {
-        $this->id = $id;
+        $this->idClient = $idClient;
     }
 
     public function setNom(string $nom): void
@@ -56,7 +56,7 @@ class Client {
 
     public function setEmail(string $email): void
     {
-        $this->email = $email;
+        $this->email = htmlspecialchars($email);
     }
 }
 
