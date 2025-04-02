@@ -9,7 +9,7 @@ class DatabaseConnection {
         // prépare la connexion si elle n'existe pas
         if ($this->database == null) {
             $host = 'localhost';
-            $dbname = 'mvc-order';
+            $dbname = 'mvc-orders';
             $username = 'root';
             $password = '';
             $charset = 'utf8mb4';

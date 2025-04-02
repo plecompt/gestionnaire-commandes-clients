@@ -34,9 +34,9 @@ class Client {
         return $this->email;
     }
 
-    public function setIdClient(int $idClient): void
+    public function setIdClient(int $idC): void
     {
-        $this->idClient = $idClient;
+        $this->idClient = $idC;
     }
 
     public function setNom(string $nom): void

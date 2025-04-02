@@ -19,11 +19,11 @@ class ClientRepository
         $clients = [];
         foreach ($result as $row) {
             $client = new Client();
-            $client->setIdClient($row['idClient']);
-            $client->setNom($row['nom']);
-            $client->setPrenom($row['prenom']);
-            $client->setAdresse($row['adresse']);
-            $client->setEmail($row['email']);
+            $client->setIdClient($row['client_id']);
+            $client->setNom($row['client_firstName']);
+            $client->setPrenom($row['client_lastName']);
+            $client->setAdresse($row['client_address']);
+            $client->setEmail($row['client_email']);
 
             $clients[] = $client;
         }
@@ -33,8 +33,8 @@ class ClientRepository
 
     public function getClient(int $idC): ?Client
     {
-        $statement = $this->connection->getConnection()->prepare("SELECT * FROM client WHERE id=:id");
-        $statement->execute(['id' => $idC]);
+        $statement = $this->connection->getConnection()->prepare("SELECT * FROM client WHERE client_id=:client_id");
+        $statement->execute(['client_id' => $idC]);
         $result = $statement->fetch();
 
         if (!$result) {
@@ -42,11 +42,11 @@ class ClientRepository
         }
 
         $client = new Client();
-        $client->setIdClient($result['idClient']);
-        $client->setNom($result['nom']);
-        $client->setPrenom($result['prenom']);
-        $client->setAdresse($result['adresse']);
-        $client->setEmail($result['email']);
+        $client->setIdClient($result['client_id']);
+        $client->setNom($result['client_firstName']);
+        $client->setPrenom($result['client_lastName']);
+        $client->setAdresse($result['client_address']);
+        $client->setEmail($result['client_email']);
 
         return $client;
     }
@@ -55,13 +55,13 @@ class ClientRepository
     {
         $statement = $this->connection
                 ->getConnection()
-                ->prepare('INSERT INTO client (nom, prenom, adresse, email) VALUES (:nom, :prenom, :adresse, :email);');
+                ->prepare('INSERT INTO client (client_firstName, client_lastName, client_address, client_email) VALUES (:client_firstName, :client_lastName, :client_address, :client_email);');
 
         return $statement->execute([
-            'nom' => $client->getNom(),
-            'prenom' => $client->getPrenom(),
-            'adresse' => $client->getAdresse(),
-            'email' => $client->getEmail()
+            'client_firstName' => $client->getNom(),
+            'client_lastName' => $client->getPrenom(),
+            'client_address' => $client->getAdresse(),
+            'client_email' => $client->getEmail()
         ]);
     }
 
@@ -69,12 +69,12 @@ class ClientRepository
     {
         $statement = $this->connection
                 ->getConnection()
-                ->prepare('UPDATE client SET adresse = :adresse, email = :email WHERE id = :id');
+                ->prepare('UPDATE client SET client_address = :client_address, client_email = :client_email WHERE client_id = :client_id');
 
         return $statement->execute([
-            'id' => $client->getIdClient(),
-            'adresse' => $client->getAdresse(),
-            'email' => $client->getEmail()
+            'client_id' => $client->getIdClient(),
+            'client_address' => $client->getAdresse(),
+            'client_email' => $client->getEmail()
         ]);
     }
 
@@ -82,8 +82,8 @@ class ClientRepository
     {
         $statement = $this->connection
                 ->getConnection()
-                ->prepare('DELETE FROM clients WHERE id = :id');
-        $statement->bindParam(':id', $idC);
+                ->prepare('DELETE FROM client WHERE client_id = :client_id');
+        $statement->bindParam(':client_id', $idC);
 
         return $statement->execute();
     }
