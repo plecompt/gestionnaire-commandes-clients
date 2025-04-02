@@ -28,7 +28,13 @@ class ClientController
         require_once __DIR__ . '/../views/client-create.php';
     }
 
-    public function store()
+    public function showAll() {
+        $clients = $this->clientRepository->getClients();
+
+        require_once __DIR__ . '/../views/client-list.php';
+    }
+
+    public function add()
     {
         $client = new Client();
         $client->setNom($_POST['nom']);
@@ -37,7 +43,7 @@ class ClientController
         $client->setEmail($_POST['email']);
         $this->clientRepository->create($client);
 
-        header('Location: ?');
+        header('Location: ?action=client-list');
     }
 
     public function edit(int $idC)
@@ -55,14 +61,14 @@ class ClientController
         $client->setEmail($_POST['email']);
         $this->clientRepository->update($client);
 
-        header('Location: ?');
+        header('Location: ?action=client-list');
     }
 
     public function delete(int $idC)
     {
         $this->clientRepository->delete($idC);
 
-        header('Location: ?');
+        header('Location: ?action=client-list');
     }
 
     public function forbidden()
