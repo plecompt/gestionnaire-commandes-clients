@@ -1,84 +1,82 @@
 <?php
+    require_once __DIR__ . '/../lib/database.php';
+    require_once __DIR__ . '/../lib/Status.php';
 
-require_once __DIR__ . '/../lib/database.php';
-require_once __DIR__ . '/../lib/Status.php';
-
-class Order
-{
-    private int $id;
-    private string $title;
-    private string $description;
-    private Status $status;
-    private DateTime $createdAt;
-    private DateTime $updatedAt;
-
-    public function __construct(?int $id = null, string $title, string $description, Status $status, ?DateTime $createdAt, ?DateTime $updatedAt){
-        $this->id = $id;
-        $this->title = $title;
-        $this->description = $description;
-        $this->status = $status;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
-    }
-
-    public function getId(): int
+    class Order
     {
-        return $this->id;
-    }
+        private int $id;
+        private string $title;
+        private string $description;
+        private Status $status;
+        private DateTime $createdAt;
+        private DateTime $updatedAt;
 
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
+        public function __construct(?int $id = null, string $title, string $description, Status $status, ?DateTime $createdAt = null, ?DateTime $updatedAt = null){
+            $this->id = $id;
+            $this->title = $title;
+            $this->description = $description;
+            $this->status = $status;
+            $this->createdAt = $createdAt;
+            $this->updatedAt = $updatedAt;
+        }
 
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
+        public function getId(): int
+        {
+            return $this->id;
+        }
 
-    public function getStatus(): Status
-    {
-        return $this->status;
-    }
+        public function getTitle(): string
+        {
+            return $this->title;
+        }
 
-    public function getCreatedAt(): string
-    {
-        return $this->createdAt->format('Y-m-d H:i:s');
-    }
+        public function getDescription(): string
+        {
+            return $this->description;
+        }
 
-    public function getUpdatedAt(): string
-    {
-        return $this->updatedAt->format('Y-m-d H:i:s');
-    }
+        public function getStatus(): string
+        {
+            return $this->status->toString();
+        }
 
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
+        public function getCreatedAt(): string
+        {
+            return $this->createdAt->format('Y-m-d H:i:s');
+        }
 
-    public function setTitle(string $title): void
-    {
-        $this->title = htmlspecialchars($title);
-    }
+        public function getUpdatedAt(): string
+        {
+            return $this->updatedAt->format('Y-m-d H:i:s');
+        }
 
-    public function setDescription(string $description): void
-    {
-        $this->description = htmlspecialchars($description);
-    }
+        public function setId(int $id): void
+        {
+            $this->id = $id;
+        }
 
-    public function setStatus(Status $status): void
-    {
-        $this->status = $status;
-    }
+        public function setTitle(string $title): void
+        {
+            $this->title = htmlspecialchars($title);
+        }
 
-    public function setCreatedAt(DateTime $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
+        public function setDescription(string $description): void
+        {
+            $this->description = htmlspecialchars($description);
+        }
 
-    public function setUpdatedAt(DateTime $updatedAt): void
-    {
-        $this->updatedAt = $updatedAt;
-    }
-}
+        public function setStatus(Status $status): void
+        {
+            $this->status = $status;
+        }
 
+        public function setCreatedAt(DateTime $createdAt): void
+        {
+            $this->createdAt = $createdAt;
+        }
+
+        public function setUpdatedAt(DateTime $updatedAt): void
+        {
+            $this->updatedAt = $updatedAt;
+        }
+    }

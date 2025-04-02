@@ -13,21 +13,24 @@ class OrderController
 
     public function home()
     {
-        $orders = $this->orderRepository->getOrders();
-
         require_once __DIR__ . '/../views/home.php';
+    }
+
+    public function showAll()
+    {
+        $orders = $this->orderRepository->getOrders();
+        require_once __DIR__ . '/../views/order-list.php';
     }
 
     public function show(int $id) 
     {
         $order = $this->orderRepository->getOrder($id);
-
-        require_once __DIR__ . '/../views/view-order.php';
+        require_once __DIR__ . '/../views/order-view.php';
     }
 
     public function create()
     {
-        require_once __DIR__ . '/../views/create.php';
+        require_once __DIR__ . '/../views/order-create.php';
     }
 
     public function store()
@@ -54,11 +57,11 @@ class OrderController
     public function edit(int $id)
     {
         $order = $this->orderRepository->getOrder($id);
-        require_once __DIR__ . '/../views/edit.php';
+        require_once __DIR__ . '/../views/order-edit.php';
     }
 
     public function update()
-    {
+    {   
         //Pour gerer les enums
         switch ($_POST['status']){
             case ("En attente"):
@@ -71,7 +74,7 @@ class OrderController
                 $status = Status::delivered;
                 break;
         }
-        $order = new Order($_POST['id'], $_POST['title'], $_POST['description'], $status);
+        $order = new Order(id: $_POST['id'], title: $_POST['title'], description: $_POST['description'], status: $status);
         $this->orderRepository->update($order);
 
         header('Location: ?');
@@ -82,11 +85,5 @@ class OrderController
         $this->orderRepository->delete($id);
 
         header('Location: ?');
-    }
-
-    public function forbidden()
-    {
-        require_once __DIR__ . '/../views/404.php';
-        http_response_code(404);
     }
 }
