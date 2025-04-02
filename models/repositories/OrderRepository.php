@@ -102,9 +102,9 @@ class orderRepository
     {
         $statement = $this->connection
                 ->getConnection()
-                ->prepare('DELETE FROM `order` WHERE id = :id');
+                ->prepare('DELETE FROM `order` WHERE order_id = :id');
         $statement->bindParam(':id', $id);
-
+        
         return $statement->execute();
     }
 }

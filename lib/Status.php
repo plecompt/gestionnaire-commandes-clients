@@ -9,8 +9,8 @@
         {
             return match($this) {
                 self::waiting => "En attente",
-                self::delivery => "En cours",
-                self::delivered => "Terminé",
+                self::delivery => "Expédiée",
+                self::delivered => "Livrée",
             };
         }
     }
