@@ -17,7 +17,7 @@
                 </div>
                 <div class="nav-options">
                     <p class="nav-option"><a href="?action=client-create"><span class="plus">+</span> Ajouter un client</a></p>
-                    <p class="nav-option"><a href="?action=order-create"><span class="plus">+</span> Ajouter une commande</a></p>
+                    <p class="nav-option"><a href="?action=order-create&id="><span class="plus">+</span> Ajouter une commande</a></p>
                 </div>
             </nav>
         </header>

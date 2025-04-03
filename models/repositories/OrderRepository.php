@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../Order.php';
 require_once __DIR__ . '/../../lib/database.php';
+require_once __DIR__ . '/../../utils/utils.php';
 
 class orderRepository
 {
@@ -28,29 +29,14 @@ class orderRepository
     
         $orders = [];
         foreach ($result as $row) {
-            //enum status
-            switch($row['order_status']) {
-                case "En attente":
-                    $status = Status::waiting;
-                    break;
-                case "Expédiée":
-                    $status = Status::delivery;
-                    break;
-                case "Livrée":
-                    $status = Status::delivered;
-                    break;
-                default:
-                    $status = Status::waiting;
-                    break;
-            }
-    
             $order = new Order(
-                $row['order_id'], 
-                $row['order_title'], 
-                $row['order_description'], 
-                $status, 
-                date_create_from_format('Y-m-d H:i:s', $row['order_date']), 
-                date_create_from_format('Y-m-d H:i:s', $row['order_lastUpdate'])
+                clientId: $row['clientId'],
+                id: $row['order_id'], 
+                title: $row['order_title'], 
+                description: $row['order_description'], 
+                status: Utils::toEnum($row['order_status']), 
+                createdAt: date_create_from_format('Y-m-d H:i:s', $row['order_date']),
+                updatedAt: date_create_from_format('Y-m-d H:i:s', $row['order_lastUpdate'])
             );
             $orders[] = $order;
         }
@@ -67,30 +53,15 @@ class orderRepository
         if (!$result) {
             return null;
         }
-    
-        //enum status
-        switch($result['order_status']) {
-            case "En attente":
-                $status = Status::waiting;
-                break;
-            case "Expédiée":
-                $status = Status::delivery;
-                break;
-            case "Livrée":
-                $status = Status::delivered;
-                break;
-            default:
-                $status = Status::waiting;
-                break;
-        }
-    
+
         $order = new Order(
-            $result['order_id'], 
-            $result['order_title'], 
-            $result['order_description'], 
-            $status, 
-            date_create_from_format('Y-m-d H:i:s', $result['order_date']), 
-            date_create_from_format('Y-m-d H:i:s', $result['order_lastUpdate'])
+            clientId: $result['clientId'],
+            id: $result['order_id'], 
+            title: $result['order_title'], 
+            description: $result['order_description'], 
+            status: Utils::toEnum($result['order_status']), 
+            createdAt: date_create_from_format('Y-m-d H:i:s', $result['order_date']), 
+            updatedAt: date_create_from_format('Y-m-d H:i:s', $result['order_lastUpdate'])
         );
     
         return $order;
@@ -100,12 +71,13 @@ class orderRepository
     {
         $statement = $this->connection
                 ->getConnection()
-                ->prepare('INSERT INTO `order` (order_title, order_description, order_status) VALUES (:title, :description, :status);');
+                ->prepare('INSERT INTO `order` (order_title, order_description, order_status, clientId) VALUES (:title, :description, :status, :clientId);');
 
         return $statement->execute([
             'title' => $order->getTitle(),
             'description' => $order->getDescription(),
-            'status' => $order->getStatus()
+            'status' => $order->getStatus(),
+            'clientId' => $order->getClientId()
         ]);
     }
 

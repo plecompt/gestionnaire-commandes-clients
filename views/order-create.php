@@ -5,6 +5,10 @@
 
 <form action="?action=order-add" method="POST">
     <div class="mb-3">
+        <label for="clientId" class="form-label">ID Client :</label>
+        <input type="text" class="form-control" id="clientId" name="clientId" value="<?php echo $_GET['id']?>" required>
+    </div>
+    <div class="mb-3">
         <label for="title" class="form-label">Titre :</label>
         <input type="text" class="form-control" id="title" name="title" required>
     </div>

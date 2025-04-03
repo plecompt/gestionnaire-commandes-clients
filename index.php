@@ -16,7 +16,7 @@
             $orderController->show($id); //afficher une order
             break;
         case 'order-create':
-            $orderController->create(); //creer une order
+            $orderController->create(); //affiche le formulaire de creation de commande
             break;
         case 'order-list':
             $orderController->showFor($id); //afficher la liste des orders pour id
