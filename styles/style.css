@@ -56,7 +56,7 @@ a {
 
 /* HOME */
 
-#home {
+section {
     background: palegoldenrod;
     padding: 30px;
     height: 100vh;
@@ -87,13 +87,6 @@ a {
 }
 
 /* LIST */
-
-#list {
-    background: palegoldenrod;
-    padding: 30px;
-    height: 100vh;
-    text-align: center;
-}
 
 table {
     padding: 30px;

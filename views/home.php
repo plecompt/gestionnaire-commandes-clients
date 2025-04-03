@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/templates/header.php'; ?>
         
-            <section id="home">
+            <section>
                 <h1>Bienvenue sur notre site!</h1> <br>
                 <p>Vous pouvez consulter nos clients et nos commandes ci-dessous.</p>
                 <div class="home-options">

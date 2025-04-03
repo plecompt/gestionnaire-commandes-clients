@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . '/templates/header.php'; ?>
 
-<section id="list">
+            <section>
                 <h1>Liste des clients</h1>
 
                 <table>
