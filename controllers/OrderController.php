@@ -31,15 +31,20 @@ class OrderController
 
     public function create()
     {
-        require_once __DIR__ . '/../views/order-create.php';
+        require_once __DIR__ . "/../views/order-create.php";
     }
 
     public function add()
     {
-        $order = new Order(id: -1, title: $_POST['title'], description: $_POST['description'], status: Utils::toEnum($_POST['status']));
-        $this->orderRepository->create($order);
+        if(isset($_POST['clientId']) && is_numeric($_POST['clientId'])){
+            $order = new Order(clientId: $_POST['clientId'], id: null, title: $_POST['title'], description: $_POST['description'], status: Utils::toEnum($_POST['status']));
+            $this->orderRepository->create($order);
+        } else {
+            header('Location: ?action=404');
+            return ;
+        }
 
-        header('Location: ?');
+        header('Location: ?action=order-list');
     }
 
     public function edit(int $id)
@@ -50,16 +55,16 @@ class OrderController
 
     public function update()
     {   
-        $order = new Order(id: $_POST['id'], title: $_POST['title'], description: $_POST['description'], status: Utils::toEnum($_POST['status']));
+        $order = new Order(clientId: null, id: $_POST['id'], title: $_POST['title'], description: $_POST['description'], status: Utils::toEnum($_POST['status']));
         $this->orderRepository->update($order);
 
-        header('Location: ?');
+        header('Location: ?action=order-list');
     }
 
     public function delete(int $id)
     {
         $this->orderRepository->delete($id);
 
-        header('Location: ?');
+        header('Location: ?action=order-list');
     }
 }

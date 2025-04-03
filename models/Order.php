@@ -4,17 +4,17 @@
 
     class Order
     {
-        private int $clientId;
-        private int $id;
+        private ?int $clientId;
+        private ?int $id;
         private string $title;
         private string $description;
         private Status $status;
         private ?DateTime $createdAt = null;
         private ?DateTime $updatedAt = null;
 
-        public function __construct(?int $id = null, string $title, string $description, Status $status, ?DateTime $createdAt = null, ?DateTime $updatedAt = null){
-            //$this->clientId = $clientId;
-            $this->id = $id;
+        public function __construct(?int $clientId = null, ?int $id = null, string $title, string $description, Status $status, ?DateTime $createdAt = null, ?DateTime $updatedAt = null){
+            $this->clientId = $clientId ?? null;
+            $this->id = $id ?? null;
             $this->title = $title;
             $this->description = $description;
             $this->status = $status;
