@@ -85,9 +85,9 @@ class orderRepository
     {
         $statement = $this->connection
         ->getConnection()
-        ->prepare('UPDATE `order` SET order_title = :title, order_description = :description, order_status = :status, order_lastUpdate = NOW() WHERE order_id = :id');
+        ->prepare('UPDATE `order` SET clientId = :clientId, order_title = :title, order_description = :description, order_status = :status, order_lastUpdate = NOW() WHERE order_id = :id');
 
-        return $statement->execute(['id' => $order->getId(), 'title' => $order->getTitle(), 'description' => $order->getDescription(), 'status' => $order->getStatus()]);
+        return $statement->execute(['id' => $order->getId(), 'clientId' => $order->getClientId(), 'title' => $order->getTitle(), 'description' => $order->getDescription(), 'status' => $order->getStatus()]);
     }
 
     public function delete(int $id): bool

@@ -1,5 +1,7 @@
 <?php require_once __DIR__ . '/templates/header.php'; ?>
-        
-<h2 class="mb-4">Erreur 404 🙂</h2>
+   
+<section>
+    <h1>Erreur 404 🙂</h1>
+</section>
 
 <?php require_once __DIR__ . '/templates/footer.php';

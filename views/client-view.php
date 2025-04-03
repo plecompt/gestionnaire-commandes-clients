@@ -21,8 +21,8 @@
                     </div>
                     <div class="view-buttons">
                         <button id="edit"><a href="?action=client-edit&id=<?= $client->getIdClient() ?>">Modifier les informations du client ✏️</a></button>
-                        <button id="ajout-commande"><a href="?action=order-create&id=<?= $client->getIdClient() ?>">Ajouter une commande ✏️</a></button>
-                        <button id="voir-commandes"><a href="?action=order-list&id=<?= $client->getIdClient() ?>">Voir les commandes de ce client ✏️</a></button>
+                        <button class="order"><a href="?action=order-create&id=<?= $client->getIdClient() ?>">Ajouter une commande 🛒</a></button>
+                        <button class="order"><a href="?action=order-list&id=<?= $client->getIdClient() ?>">Voir les commandes de ce client 🔎</a></button>
                         <button id="delete"><a onclick="return confirm('Voulez-vous supprimer cette entrée?');" href="?action=client-delete&id=<?= $client->getIdClient() ?>">Supprimer le profil client ❌</a></button>
                     </div>
                 </div>

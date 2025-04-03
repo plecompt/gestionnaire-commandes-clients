@@ -1,17 +1,42 @@
 <?php require_once __DIR__ . '/templates/header.php'; ?>
 
-<h2 class="mb-4">📋 Détail de la commande</h2>
-
-<p><strong>ID Client : </strong> <?= $order->getId() ?></p>
-<p><strong>ID Commande : </strong> <?= $order->getId() ?></p>
-<p><strong>Titre : </strong> <?= $order->getTitle() ?></p>
-<p><strong>Description : </strong> <?= $order->getDescription() ?></p>
-<p><strong>Statut : </strong> <?= $order->getStatus() ?></p>
-<p><strong>Créée le : </strong> <?= $order->getCreatedAt() ?></p>
-<p><strong>Dernière mise à jour : </strong> <?= $order->getUpdatedAt() ?></p>
-
-<a href="?action=order-edit&id=<?= $order->getId() ?>" class="btn btn-warning">Modifier la commande</a>
-<a onclick="return confirm('Etes vous sur de vouloir supprimer cette commande ?');" href="?action=order-delete&id=<?= $order->getId() ?>" class="btn btn-dark btn-sm">❌ Supprimer</a>
-<a href="?action=order-list" class="btn btn-secondary">Retour à la liste des commandes</a>
+            <section>
+                <h1>Détails de la commande</h1>
+                <div class="view-container">
+                    <div class="view-options">
+                        <div class="view-option key">ID Commande</div>
+                        <div class="view-option value"><?= $order->getId() ?></div>
+                    </div>
+                    <div class="view-options">
+                        <div class="view-option key">ID Client</div>
+                        <div class="view-option value"><?= $order->getClientId() ?></div>
+                    </div>
+                    <div class="view-options">
+                        <div class="view-option key">Titre</div>
+                        <div class="view-option value"><?= $order->getTitle() ?></div>
+                    </div>
+                    <div class="view-options">
+                        <div class="view-option key">Description</div>
+                        <div class="view-option value"><?= $order->getDescription() ?></div>
+                    </div>
+                    <div class="view-options">
+                        <div class="view-option key">Statut</div>
+                        <div class="view-option value"><?= $order->getStatus() ?></div>
+                    </div>
+                    <div class="view-options">
+                        <div class="view-option key">Création de la commande</div>
+                        <div class="view-option value"><?= $order->getCreatedAt() ?></div>
+                    </div>
+                    <div class="view-options">
+                        <div class="view-option key">Dernière mise à jour</div>
+                        <div class="view-option value"><?= $order->getUpdatedAt() ?></div>
+                    </div>
+                    <div class="view-buttons">
+                        <button id="edit"><a href="?action=order-edit&id=<?= $order->getId() ?>">Modifier les informations de la commande ✏️</a></button>
+                        <button id="delete"><a onclick="return confirm('Voulez-vous supprimer cette entrée?');" href="?action=order-delete&id=<?= $order->getId() ?>">Supprimer la commande ❌</a></button>
+                    </div>
+                </div>
+                <button class="return"><a href="?action=order-list" >Retour à la liste</a></button>
+            </section>
 
 <?php require_once __DIR__ . '/templates/footer.php'; 

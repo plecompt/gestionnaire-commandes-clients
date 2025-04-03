@@ -55,7 +55,7 @@ class OrderController
 
     public function update()
     {   
-        $order = new Order(clientId: null, id: $_POST['id'], title: $_POST['title'], description: $_POST['description'], status: Utils::toEnum($_POST['status']));
+        $order = new Order(clientId: $_POST['clientId'], id: $_POST['id'], title: $_POST['title'], description: $_POST['description'], status: Utils::toEnum($_POST['status']));
         $this->orderRepository->update($order);
 
         header('Location: ?action=order-list');

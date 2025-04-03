@@ -1,40 +1,41 @@
 <?php require_once __DIR__ . '/templates/header.php'; ?>
         
-<h2 class="mb-4">📋 Liste des commandes</h2>
+        <section>
+            <h1>Liste des commandes</h1>
 
-<table class="table table-striped table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>ID Client</th>
-            <th>ID Commande</th>
-            <th>Titre</th>
-            <th>Description</th>
-            <th>Statut</th>
-            <th>Créé le</th>
-            <th>Mise à jour le</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($orders as $order): ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID Commande</th>
+                            <th>ID Client</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Statut</th>
+                            <th>Crée le</th>
+                            <th>Dernière mise à jour</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
 
-            <tr>
-                <td><?= $order->getClientId(); ?></td>
-                <td><?= $order->getId(); ?></td>
-                <td><a href="?action=order-view&id=<?= $order->getId() ?>"><?= $order->getTitle(); ?></a></td>
-                <td><?= $order->getDescription(); ?></td>
-                <td><?= $order->getStatus(); ?></td>
-                <td><?= $order->getCreatedAt() ?></td>
-                <td><?= $order->getUpdatedAt() ?></td>
-                <td>
-                    <a href="?action=order-view&id=<?= $order->getId() ?>" class="btn btn-primary btn-sm">👀</a>
-                    <a href="?action=order-edit&id=<?= $order->getId() ?>" class="btn btn-warning btn-sm">✏️</a>
-                    <a onclick="return confirm('Etes vous sur de vouloir supprimer cette commande ?');" href="?action=order-delete&id=<?= $order->getId() ?>" class="btn btn-dark btn-sm">❌</a>
-                </td>
-            </tr>
-
-        <?php endforeach; ?>
-    </tbody>
-</table>
+                    <tbody>
+                        <?php foreach($orders as $order): ?>
+                        <tr>
+                            <td><?= $order->getId(); ?></td>
+                            <td><?= $order->getClientId(); ?></td>
+                            <td><a id="order-link" href="?action=order-view&id=<?= $order->getId() ?>"><?= $order->getTitle(); ?></a></td>
+                            <td><?= $order->getDescription(); ?></td>
+                            <td><?= $order->getStatus(); ?></td>
+                            <td><?= $order->getCreatedAt() ?></td>
+                            <td><?= $order->getUpdatedAt() ?></td>
+                            <td class="list-options">
+                                <button id="view"><a href="?action=order-view&id=<?= $order->getId() ?>">Voir 🔎</a></button>
+                                <button id="edit"><a href="?action=order-edit&id=<?= $order->getId() ?>">Modifier ✏️</a></button>
+                                <button id="delete"><a onclick="return confirm('Voulez-vous supprimer cette commande?');" href="?action=order-delete&id=<?= $order->getId() ?>">Supprimer ❌</a></button>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </section>
 
 <?php require_once __DIR__ . '/templates/footer.php';

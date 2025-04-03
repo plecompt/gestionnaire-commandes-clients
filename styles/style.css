@@ -54,6 +54,11 @@ a {
     text-decoration: none;
 }
 
+#order-link {
+    color: darkcyan;
+    text-decoration: underline;
+}
+
 /* HOME */
 
 section {
@@ -131,6 +136,10 @@ button:hover {
     background-color: coral;
 }
 
+.order {
+    background-color: gold;
+}
+
 /* create: forms */
 
 form {
@@ -152,7 +161,7 @@ label {
     text-align: right;
 }
 
-input {
+input, textarea, select {
     width: 250px;
     padding: 8px;
 }
@@ -181,12 +190,13 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-width: 500px;
+    min-width: 600px;
 }
 
 .view-option {
     height: 100%;
     padding: 20px;
+    text-align: left;
 }
 
 .view-buttons {
@@ -198,13 +208,13 @@ input {
 .key {
     font-weight: bold;
     background-color: darkgoldenrod;
-    min-width: 150px;
+    min-width: 250px;
     border-radius: 10px 0 0 10px;
 }
 
 .value {
     background-color: goldenrod;
-    min-width: 600px;
+    min-width: 500px;
     border-radius: 0 10px 10px 0;
 }
 
