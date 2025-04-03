@@ -16,7 +16,7 @@ class orderRepository
     public function getOrders(?int $id = null): ?array
     {
         if ($id !== null) {
-            $statement = $this->connection->getConnection()->prepare('SELECT * FROM `order` WHERE client_id = :id');
+            $statement = $this->connection->getConnection()->prepare('SELECT * FROM `order` WHERE clientId = :id');
             $statement->execute([':id' => $id]);
         } else {
             $statement = $this->connection->getConnection()->query('SELECT * FROM `order`');
