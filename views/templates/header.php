@@ -1,38 +1,24 @@
-
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des tâches</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        .home {
-            text-align: center;
-            margin: 0 auto;
-            padding: 20px;
-            font-size: 30px;
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="?">📋 Gestion des commandes</a>
-            <div class="" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="?">🏠 Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?action=client-create">⊕ Ajouter un client</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?action=create-order">⊕ Ajouter une commande</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container mt-5"></div>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+        <title>Gestionnaire de commandes</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="nav-title">
+                    <h1><a href="?">BatiExpert 🚧</a></h1>
+                </div>
+                <div class="nav-options">
+                    <p class="nav-option"><a href="?action=client-create"><span class="plus">+</span> Ajouter un client</a></p>
+                    <p class="nav-option"><a href="?action=order-create"><span class="plus">+</span> Ajouter une commande</a></p>
+                </div>
+            </nav>
+        </header>
+        <main>

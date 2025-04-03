@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto;
+    box-sizing: border-box;
+    /* outline: 1px solid yellow; */
+}
+
+/* NAV BAR (HEADER) */
+
+nav {
+    margin: 0 auto;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: goldenrod;
+}
+
+.nav-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+.nav-options {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.nav-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.nav-option:hover {
+    cursor: pointer;
+    background-color: darkgoldenrod;
+}
+
+.plus {
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+/* HOME */
+
+#home {
+    background: palegoldenrod;
+    padding: 30px;
+    height: 100vh;
+    text-align: center;
+}
+
+.home-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    height: 500px;
+    margin: 50px auto;
+    gap: 60px;
+}
+
+.home-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    width: 500px;
+    height: 100%;
+    font-size: 25px;
+    background-color: goldenrod;
+    border: 3px solid darkgoldenrod;
+    border-radius: 10px;
+}
+
+/* LIST */
+
+#list {
+    background: palegoldenrod;
+    padding: 30px;
+    height: 100vh;
+    text-align: center;
+}
+
+table {
+    padding: 30px;
+    margin: 0 auto;
+}
+
+thead {
+    background-color: #333333;
+    color: white;
+}
+
+th {
+    padding: 10px;
+}
+
+td {
+    padding: 20px;
+    background-color: goldenrod;
+}
+
+.list-options button {
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid darkgoldenrod;
+    background: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#view {
+    background-color: peachpuff;
+}
+
+#edit {
+    background-color: palegreen;
+}
+
+#delete {
+    background-color: coral;
+}
+
+/* footer */
+
+footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    margin: 0 auto;
+    height: 60px;
+    background-color: goldenrod;
+}
+
+#copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    padding: 20px;
+}
