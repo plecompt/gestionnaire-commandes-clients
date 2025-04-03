@@ -12,62 +12,87 @@ class orderRepository
         $this->connection = new DatabaseConnection();
     }
 
-    public function getOrders(): ?array
+    public function getOrders(?int $id = null): ?array
     {
-        $statement = $this->connection->getConnection()->query('SELECT * FROM `order`');
+        if ($id !== null) {
+            $statement = $this->connection->getConnection()->prepare('SELECT * FROM `order` WHERE client_id = :id');
+            $statement->execute([':id' => $id]);
+        } else {
+            $statement = $this->connection->getConnection()->query('SELECT * FROM `order`');
+        }
         $result = $statement->fetchAll();
-
-        if (!$result){
-            return null;
-        }
-
-        $orders = [];
-        foreach ($result as $row) {
-            //enum status
-            switch($row['order_status']){
-                case ('En attente'):
-                    $status = Status::waiting;
-                    break;
-                case ("Expédiée"):
-                    $status = Status::delivery;
-                    break;
-                case ("Livrée"):
-                    $status = Status::delivered;
-                    break;
-            }
-
-            $order = new Order($row['order_id'], $row['order_title'], $row['order_description'], $status, date_create_from_format('Y-m-d H:i:s', $row['order_date']), date_create_from_format('Y-m-d H:i:s', $row['order_lastUpdate']));
-            $orders[] = $order;
-        }
-
-        return $orders;
-    }
-
-    public function getOrder(int $id): ?Order
-    {
-        $statement = $this->connection->getConnection()->prepare("SELECT * FROM `order` WHERE `order_id`=:id");
-        $statement->execute(['id' => $id]);
-        $result = $statement->fetch();
-
+    
         if (!$result) {
             return null;
         }
-
+    
+        $orders = [];
+        foreach ($result as $row) {
+            //enum status
+            switch($row['order_status']) {
+                case "En attente":
+                    $status = Status::waiting;
+                    break;
+                case "Expédiée":
+                    $status = Status::delivery;
+                    break;
+                case "Livrée":
+                    $status = Status::delivered;
+                    break;
+                default:
+                    $status = Status::waiting;
+                    break;
+            }
+    
+            $order = new Order(
+                $row['order_id'], 
+                $row['order_title'], 
+                $row['order_description'], 
+                $status, 
+                date_create_from_format('Y-m-d H:i:s', $row['order_date']), 
+                date_create_from_format('Y-m-d H:i:s', $row['order_lastUpdate'])
+            );
+            $orders[] = $order;
+        }
+    
+        return $orders;
+    }
+    
+    public function getOrder(int $id): ?Order
+    {
+        $statement = $this->connection->getConnection()->prepare("SELECT * FROM `order` WHERE `order_id` = :id");
+        $statement->execute([':id' => $id]);
+        $result = $statement->fetch();
+    
+        if (!$result) {
+            return null;
+        }
+    
         //enum status
-        switch($result['order_status']){
-            case ("En attente"):
+        switch($result['order_status']) {
+            case "En attente":
                 $status = Status::waiting;
                 break;
-            case ("Expédiée"):
+            case "Expédiée":
                 $status = Status::delivery;
                 break;
-            case ("Livrée"):
+            case "Livrée":
                 $status = Status::delivered;
                 break;
+            default:
+                $status = Status::waiting;
+                break;
         }
-
-        $order = new Order($result['order_id'], $result['order_title'], $result['order_description'], $status, date_create_from_format('Y-m-d H:i:s', $result['order_date']), date_create_from_format('Y-m-d H:i:s', $result['order_lastUpdate']));
-
+    
+        $order = new Order(
+            $result['order_id'], 
+            $result['order_title'], 
+            $result['order_description'], 
+            $status, 
+            date_create_from_format('Y-m-d H:i:s', $result['order_date']), 
+            date_create_from_format('Y-m-d H:i:s', $result['order_lastUpdate'])
+        );
+    
         return $order;
     }
 
@@ -87,15 +112,10 @@ class orderRepository
     public function update(Order $order): bool
     {
         $statement = $this->connection
-                ->getConnection()
-                ->prepare('UPDATE `order` SET order_title = :title, order_description = :description, order_status = :status WHERE order_id = :id');
-    
-        return $statement->execute([
-            'id' => $order->getId(),
-            'title' => $order->getTitle(),
-            'description' => $order->getDescription(),
-            'status' => $order->getStatus()
-        ]);
+        ->getConnection()
+        ->prepare('UPDATE `order` SET order_title = :title, order_description = :description, order_status = :status, order_lastUpdate = NOW() WHERE order_id = :id');
+
+        return $statement->execute(['id' => $order->getId(), 'title' => $order->getTitle(), 'description' => $order->getDescription(), 'status' => $order->getStatus()]);
     }
 
     public function delete(int $id): bool

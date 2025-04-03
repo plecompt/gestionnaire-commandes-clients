@@ -16,8 +16,8 @@
                         <a class="nav-link" href="?">🏠 Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?action=create">⊕ Ajouter un utilisateur</a>
-                        <a class="nav-link" href="?action=create">⊕ Ajouter une tâche</a>
+                        <a class="nav-link" href="?action=user-create">⊕ Ajouter un utilisateur</a>
+                        <a class="nav-link" href="?action=order-create">⊕ Ajouter une commande</a>
                     </li>
                 </ul>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/repositories/OrderRepository.php';
+require_once __DIR__ . '/../utils/utils.php';
 
 class OrderController
 {
@@ -16,9 +17,9 @@ class OrderController
         require_once __DIR__ . '/../views/home.php';
     }
 
-    public function showAll()
+    public function showFor(?int $id = null)
     {
-        $orders = $this->orderRepository->getOrders();
+        $orders = $this->orderRepository->getOrders($id);
         require_once __DIR__ . '/../views/order-list.php';
     }
 
@@ -33,22 +34,9 @@ class OrderController
         require_once __DIR__ . '/../views/order-create.php';
     }
 
-    public function store()
+    public function add()
     {
-        //Pour gerer les enums
-        switch ($_POST['status']){
-            case ("En attente"):
-                $status = Status::waiting;
-                break;
-            case ("Expediée"):
-                $status = Status::delivery;
-                break;
-            case ("Livrée"):
-                $status = Status::delivered;
-                break;
-        }
-
-        $order = new Order(title: $_POST['title'], description: $_POST['description'], status: $status);
+        $order = new Order(id: -1, title: $_POST['title'], description: $_POST['description'], status: Utils::toEnum($_POST['status']));
         $this->orderRepository->create($order);
 
         header('Location: ?');
@@ -62,19 +50,7 @@ class OrderController
 
     public function update()
     {   
-        //Pour gerer les enums
-        switch ($_POST['status']){
-            case ("En attente"):
-                $status = Status::waiting;
-                break;
-            case ("Expediée"):
-                $status = Status::delivery;
-                break;
-            case ("Livrée"):
-                $status = Status::delivered;
-                break;
-        }
-        $order = new Order(id: $_POST['id'], title: $_POST['title'], description: $_POST['description'], status: $status);
+        $order = new Order(id: $_POST['id'], title: $_POST['title'], description: $_POST['description'], status: Utils::toEnum($_POST['status']));
         $this->orderRepository->update($order);
 
         header('Location: ?');

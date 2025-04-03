@@ -4,20 +4,27 @@
 
     class Order
     {
+        private int $clientId;
         private int $id;
         private string $title;
         private string $description;
         private Status $status;
-        private DateTime $createdAt;
-        private DateTime $updatedAt;
+        private ?DateTime $createdAt = null;
+        private ?DateTime $updatedAt = null;
 
         public function __construct(?int $id = null, string $title, string $description, Status $status, ?DateTime $createdAt = null, ?DateTime $updatedAt = null){
+            //$this->clientId = $clientId;
             $this->id = $id;
             $this->title = $title;
             $this->description = $description;
             $this->status = $status;
-            $this->createdAt = $createdAt;
-            $this->updatedAt = $updatedAt;
+            $this->createdAt = $createdAt ?? new DateTime();
+            $this->updatedAt = $updatedAt ?? new DateTime();
+        }
+
+        public function getClientId(): int
+        {
+            return $this->clientId;
         }
 
         public function getId(): int
@@ -48,6 +55,11 @@
         public function getUpdatedAt(): string
         {
             return $this->updatedAt->format('Y-m-d H:i:s');
+        }
+
+        public function setClientId(int $clientId): void
+        {
+            $this->clientId = $clientId;
         }
 
         public function setId(int $id): void

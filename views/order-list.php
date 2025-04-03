@@ -5,7 +5,8 @@
 <table class="table table-striped table-bordered">
     <thead class="table-dark">
         <tr>
-            <th>ID</th>
+            <!-- <th>ID Client</th>         -->
+            <th>ID Commande</th>
             <th>Titre</th>
             <th>Description</th>
             <th>Statut</th>
@@ -18,6 +19,7 @@
         <?php foreach($orders as $order): ?>
 
             <tr>
+                <!--<td></td>-->
                 <td><?= $order->getId(); ?></td>
                 <td><a href="?action=order-view&id=<?= $order->getId() ?>"><?= $order->getTitle(); ?></a></td>
                 <td><?= $order->getDescription(); ?></td>
@@ -27,7 +29,7 @@
                 <td>
                     <a href="?action=order-view&id=<?= $order->getId() ?>" class="btn btn-primary btn-sm">👀</a>
                     <a href="?action=order-edit&id=<?= $order->getId() ?>" class="btn btn-warning btn-sm">✏️</a>
-                    <a onclick="return confirm('T’es sûr ?');" href="?action=delete&id=<?= $order->getId() ?>" class="btn btn-dark btn-sm">❌</a>
+                    <a onclick="return confirm('T’es sûr ?');" href="?action=order-delete&id=<?= $order->getId() ?>" class="btn btn-dark btn-sm">❌</a>
                 </td>
             </tr>
 

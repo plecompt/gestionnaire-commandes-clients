@@ -18,11 +18,11 @@
         $status = $order->getStatus();
 
         ?>
-        <select class="form-control" name="status" id="status">
-            <option <?= $status == 'En attente' ? 'selected' : '' ?> value="En attente">En attente</option>
-            <option <?= $status == 'En cours' ? 'selected' : '' ?> value="Expédiée">Expédiée</option>
-            <option <?= $status == 'Terminé' ? 'selected' : '' ?> value="Livrée">Livrée</option>
-        </select>
+    <select class="form-control" name="status" id="status">
+        <option <?= $status == 'En attente' ? 'selected' : '' ?> value="En attente">En attente</option>
+        <option <?= $status == 'Expédiée' ? 'selected' : '' ?> value="Expédiée">Expédiée</option>
+        <option <?= $status == 'Livrée' ? 'selected' : '' ?> value="Livrée">Livrée</option>
+    </select>
     </div>
     <button type="submit" class="btn btn-primary">Modifier</button>
 </form>
